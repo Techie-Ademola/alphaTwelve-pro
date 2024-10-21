@@ -1,0 +1,79 @@
+
+* {
+  font-family: "Inter", sans-serif !important;
+  font-optical-sizing: auto !important;
+  /* font-weight: <weight>; */
+  font-style: normal;
+}
+
+html, body {
+    background: hsla(220, 35%, 3%, 1);
+}
+
+html[data-mui-color-scheme="light"], 
+html[data-mui-color-scheme="light"] body {
+    background: rgba(255, 255, 255, 1);
+}
+
+.sidebar_drawer div {
+    transition: width .1s linear !important;
+    white-space: nowrap !important;
+}
+
+.MuiList-root * {
+    transition: none !important;
+}
+
+.collapse_navitem svg path {
+    fill: #ADA9BB;
+}
+
+.mode_toggler * {
+    opacity: 1 !important;
+}
+.mode_toggler .no_show {
+    opacity: 0 !important;
+}
+
+.sidebar_wrap .MuiButtonBase-root .MuiTypography-root {
+    font-family: "Inter", sans-serif !important;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    
+}
+html[data-mui-color-scheme="light"] .sidebar_wrap .Mui-selected,
+html[data-mui-color-scheme="light"] .sidebar_wrap .Mui-selected svg path
+ {
+color: rgba(133, 118, 255, 1) !important;
+background: rgba(252, 247, 255, 1) !important;
+}
+
+html[data-mui-color-scheme="dark"] .sidebar_wrap .Mui-selected,
+html[data-mui-color-scheme="dark"] .sidebar_wrap .Mui-selected svg path
+ {
+color: white !important;
+background: rgba(133, 118, 255, 1) !important;
+}
+
+html[data-mui-color-scheme="dark"] .sidebar_wrap .MuiButtonBase-root .MuiTypography-root {
+color: rgba(255, 255, 255, 1) !important;
+}
+
+/* .sidebar_wrap .Mui-selected {
+background-color: rgba(133, 118, 255, 1) !important;
+} */
+
+html[data-mui-color-scheme="light"] .sidebar_wrap .Mui-selected {
+    /* background-color: rgba(133, 118, 255, 1) !important; */
+font-weight: 500;
+}
+
+.sidebar_wrap .MuiList-root .MuiButtonBase-root {
+    border-radius: 4px;
+}
+
+.mode_toggler .MuiButtonBase-root.MuiListItemButton-root {
+    padding-left: 4px !important;
+}
