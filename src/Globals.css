@@ -1,17 +1,22 @@
-
 * {
-  font-family: "Inter", sans-serif !important;
-  font-optical-sizing: auto !important;
-  /* font-weight: <weight>; */
-  font-style: normal;
+    font-family: "Inter", sans-serif !important;
+    font-optical-sizing: auto !important;
+    /* font-weight: <weight>; */
+    font-style: normal;
 }
 
-html, body {
-    background: hsla(220, 35%, 3%, 1);
+html,
+body {
+    /* background: hsla(220, 35%, 3%, 1); */
 }
 
-html[data-mui-color-scheme="light"], 
+html[data-mui-color-scheme="light"],
 html[data-mui-color-scheme="light"] body {
+    background: rgba(255, 255, 255, 1);
+}
+
+html[data-mui-color-scheme="dark"],
+html[data-mui-color-scheme="dark"] body {
     background: rgba(255, 255, 255, 1);
 }
 
@@ -31,6 +36,7 @@ html[data-mui-color-scheme="light"] body {
 .mode_toggler * {
     opacity: 1 !important;
 }
+
 .mode_toggler .no_show {
     opacity: 0 !important;
 }
@@ -41,24 +47,23 @@ html[data-mui-color-scheme="light"] body {
     font-weight: 400;
     line-height: 20px;
     text-align: left;
-    
+
 }
+
 html[data-mui-color-scheme="light"] .sidebar_wrap .Mui-selected,
-html[data-mui-color-scheme="light"] .sidebar_wrap .Mui-selected svg path
- {
-color: rgba(133, 118, 255, 1) !important;
-background: rgba(252, 247, 255, 1) !important;
+html[data-mui-color-scheme="light"] .sidebar_wrap .Mui-selected svg path {
+    color: rgba(133, 118, 255, 1) !important;
+    background: rgba(252, 247, 255, 1) !important;
 }
 
 html[data-mui-color-scheme="dark"] .sidebar_wrap .Mui-selected,
-html[data-mui-color-scheme="dark"] .sidebar_wrap .Mui-selected svg path
- {
-color: white !important;
-background: rgba(133, 118, 255, 1) !important;
+html[data-mui-color-scheme="dark"] .sidebar_wrap .Mui-selected svg path {
+    color: white !important;
+    background: rgba(133, 118, 255, 1) !important;
 }
 
 html[data-mui-color-scheme="dark"] .sidebar_wrap .MuiButtonBase-root .MuiTypography-root {
-color: rgba(255, 255, 255, 1) !important;
+    color: rgba(255, 255, 255, 1) !important;
 }
 
 /* .sidebar_wrap .Mui-selected {
@@ -67,7 +72,7 @@ background-color: rgba(133, 118, 255, 1) !important;
 
 html[data-mui-color-scheme="light"] .sidebar_wrap .Mui-selected {
     /* background-color: rgba(133, 118, 255, 1) !important; */
-font-weight: 500;
+    font-weight: 500;
 }
 
 .sidebar_wrap .MuiList-root .MuiButtonBase-root {
@@ -76,4 +81,258 @@ font-weight: 500;
 
 .mode_toggler .MuiButtonBase-root.MuiListItemButton-root {
     padding-left: 4px !important;
+}
+
+.notification_badge {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    border-radius: 50%;
+    background: rgba(244, 63, 94, 1);
+    color: white;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+/* Carousel styles */
+
+.styled_carousel .carousel-item {
+    max-height: 410px;
+    position: relative;
+}
+
+.styled_carousel .carousel-control-prev,
+.styled_carousel .carousel-control-next {
+
+    opacity: 1 !important;
+}
+
+.styled_carousel .carousel-control-prev-icon,
+.styled_carousel .carousel-control-next-icon {
+    transform: scale(1.5);
+    transition: .2s ease-out;
+    background-image: none !important;
+}
+
+.styled_carousel .carousel-control-prev-icon:hover,
+.styled_carousel .carousel-control-next-icon:hover {
+    transform: scale(1.6);
+}
+
+.styled_carousel .caption_box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 65%);
+    color: white;
+}
+
+.styled_carousel .caption_box p {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 16px;
+    text-align: left;
+}
+
+.styled_carousel .caption_box span {
+    font-family: Inter;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    text-align: left;
+
+}
+
+.styled_carousel li {
+    max-width: 20px !important;
+    height: 3px !important;
+    border-radius: 5px !important;
+    overflow: hidden !important;
+}
+
+.search_input_wrap i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: rgba(148, 163, 184, 1);
+}
+
+.search_input {
+    box-shadow: none !important;
+    border: 1px solid hsla(220, 20%, 80%, 0.4);
+    outline: none !important;
+    padding: 8px 10px !important;
+    font-size: 14px;
+    text-indent: 25px;
+    min-width: 210px;
+}
+
+.search_input::placeholder {
+    font-size: 13px;
+    color: rgba(203, 213, 225, 1);
+}
+
+.date_filterbutton {
+    border-radius: 0 !important;
+    padding: 18px 10px !important;
+    min-width: 140px;
+    text-align: left !important;
+    justify-content: start !important;
+    position: relative;
+}
+
+.MuiInputBase-root {
+    border-radius: 0 !important;
+    padding: 18px 10px !important;
+    min-width: 140px;
+    text-align: left !important;
+    justify-content: start !important;
+    position: relative;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+.MuiToolbar-root p {
+    margin-bottom: 0 !important;
+}
+.MuiFormControl-root,
+.MuiFormControl-root
+ * {
+    box-shadow: none !important;
+outline: none !important;
+}
+.status_Filter * {
+    box-shadow: none !important;
+outline: none !important;
+}
+.date_filterbutton svg {
+    display: none;
+}
+.fit-content {
+    min-width: 40px !important;
+}
+
+.date_filterbutton .drop_svg {
+    display: block !important;
+    position: absolute;
+    z-index: 10;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%) scale(1.5);
+}
+
+.MuiDataGrid-row * {
+    overflow: visible !important;
+}
+
+/* .MuiDataGrid-row {
+    min-height: 70px !important;
+}
+
+.MuiDataGrid-cell {
+    padding-top: 16px !important;
+} */
+.MuiDataGrid-selectedRowCount {
+    display: none;
+}
+/* .MuiDataGrid-virtualScroller,
+.MuiDataGrid-virtualScrollerContent,
+.MuiDataGrid-virtualScrollerRenderZone {
+    min-height: 100% !important;
+    max-height: 100% !important;
+} */
+/* .MuiDataGrid-virtualScrollerRenderZone {
+    display: flex !important;
+    width: 100% !important;
+flex-direction: column !important;
+gap: 20px;
+} */
+.MuiDataGrid-cell:active,
+.MuiDataGrid-cell:valid,
+.MuiDataGrid-cell:focus,
+.MuiDataGrid-cell:focus-within {
+    /* border: none !important; */
+    outline: none !important;
+}
+
+.status_text {
+    position: relative;
+    padding: 5px 10px 5px 25px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+html[data-mui-color-scheme="light"] .status_text.success {
+    background-color: rgba(209, 250, 229, 1);
+    color: rgba(16, 185, 129, 1) !important;
+}
+
+html[data-mui-color-scheme="light"] .status_text.inprogress {
+    background-color: rgba(219, 234, 254, 1);
+    color: rgba(59, 130, 246, 1) !important;
+}
+
+html[data-mui-color-scheme="dark"] .status_text.success {
+    background-color: transparent;
+    border: 1px solid rgba(16, 185, 129, 1);
+    color: rgba(16, 185, 129, 1) !important;
+}
+
+html[data-mui-color-scheme="dark"] .status_text.inprogress {
+    background-color: transparent;
+    border: 1px solid rgba(59, 130, 246, 1);
+    color: rgba(59, 130, 246, 1) !important;
+}
+
+.status_text.success::before,
+.status_text.inprogress::before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 13px;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    font-weight: 400;
+}
+
+.status_text.success::before {
+    background-color: rgba(16, 185, 129, 1);
+}
+
+.status_text.inprogress::before {
+    background-color: rgba(59, 130, 246, 1);
+}
+html[data-mui-color-scheme="dark"] h2, 
+html[data-mui-color-scheme="dark"] h3, 
+html[data-mui-color-scheme="dark"] p, 
+html[data-mui-color-scheme="dark"] .MuiBox-root 
+{
+    color: #fff;
+}
+
+@media screen and (max-width: 576px) {
+    .styled_carousel img {
+        min-height: 248px !important;
+    }
+
+    .styled_carousel .carousel-item {
+        min-height: 495px;
+        position: relative;
+    }
+
+    .carousel-item {
+        background: #ADA9BB;
+    }
+
+    .collapse_navitem {
+        display: none;
+    }
 }

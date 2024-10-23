@@ -14,9 +14,9 @@ import StatCard, { StatCardProps } from './StatCard';
 
 const data: StatCardProps[] = [
   {
-    title: 'Users',
-    value: '14k',
-    interval: 'Last 30 days',
+    title: 'Total Events',
+    value: '100,000',
+    interval: '+5.0%',
     trend: 'up',
     data: [
       200, 24, 220, 260, 240, 380, 100, 240, 280, 240, 300, 340, 320, 360, 340, 380,
@@ -24,9 +24,9 @@ const data: StatCardProps[] = [
     ],
   },
   {
-    title: 'Conversions',
-    value: '325',
-    interval: 'Last 30 days',
+    title: 'Active Speakers',
+    value: '25',
+    interval: '+5.0%',
     trend: 'down',
     data: [
       1640, 1250, 970, 1130, 1050, 900, 720, 1080, 900, 450, 920, 820, 840, 600, 820,
@@ -34,13 +34,23 @@ const data: StatCardProps[] = [
     ],
   },
   {
-    title: 'Event count',
-    value: '200k',
-    interval: 'Last 30 days',
-    trend: 'neutral',
+    title: 'Total Registrations',
+    value: '300',
+    interval: '+5.0%',
+    trend: 'up',
     data: [
       500, 400, 510, 530, 520, 600, 530, 520, 510, 730, 520, 510, 530, 620, 510, 530,
       520, 410, 530, 520, 610, 530, 520, 610, 530, 420, 510, 430, 520, 510,
+    ],
+  },
+  {
+    title: 'Total Revenue',
+    value: '$500,000',
+    interval: '+5.0%',
+    trend: 'down',
+    data: [
+      1640, 1250, 970, 1130, 1050, 900, 720, 1080, 900, 450, 920, 820, 840, 600, 820,
+      780, 800, 760, 380, 740, 660, 620, 840, 500, 520, 480, 400, 360, 300, 220,
     ],
   },
 ];
@@ -49,8 +59,8 @@ export default function MainGrid() {
   return (
     <Box sx={{ width: '100%', maxWidth: { sm: '100%', md: '1700px' } }}>
       {/* cards */}
-      <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
-      Welcome! here’s your summary
+      <Typography component="h2" variant="h4" sx={{ mb: 2, fontWeight: '400' }}>
+        Welcome! here’s your summary
       </Typography>
       <Grid
         container
@@ -63,31 +73,40 @@ export default function MainGrid() {
             <StatCard {...card} />
           </Grid>
         ))}
-        <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
+        {/* <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <HighlightedCard />
-        </Grid>
-        <Grid size={{ sm: 12, md: 6 }}>
-          <SessionsChart />
-        </Grid>
-        <Grid size={{ sm: 12, md: 6 }}>
+        </Grid> */}
+
+        <Grid size={{ sm: 12, md: 6 }} style={{border: '1px solid transparent'}}>
+          <Typography component="h3" variant="h5" sx={{ mb: 1, mt: 2, fontWeight: '500' }}>
+            Event Registrations per month
+          </Typography>
+
           <PageViewsBarChart />
         </Grid>
+        <Grid size={{ sm: 12, md: 6 }}>
+          <Typography component="h3" variant="h5" sx={{ mb: 1, mt: 2, fontWeight: '500', opacity: '0', visibility: 'hidden' }}>
+            E
+          </Typography>
+          
+          <SessionsChart />
+        </Grid>
       </Grid>
-      <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
-        Details
+      <Typography component="h3" variant="h5" sx={{ mb: 1, mt: 2, fontWeight: '500' }}>
+      Events History
       </Typography>
       <Grid container spacing={2} columns={12}>
-        <Grid size={{ md: 12, lg: 9 }}>
+        <Grid size={{ md: 12, lg: 12 }}>
           <CustomizedDataGrid />
         </Grid>
-        <Grid size={{ xs: 12, lg: 3 }}>
+        {/* <Grid size={{ xs: 12, lg: 3 }}>
           <Stack gap={2} direction={{ xs: 'column', sm: 'row', lg: 'column' }}>
-            {/* <CustomizedTreeView /> */}
+             <CustomizedTreeView /> 
             <ChartUserByCountry />
           </Stack>
-        </Grid>
+        </Grid> */}
       </Grid>
-      <Copyright sx={{ my: 4 }} />
+      {/* <Copyright sx={{ my: 4 }} /> */}
     </Box>
   );
 }

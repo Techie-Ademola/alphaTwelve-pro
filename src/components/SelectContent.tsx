@@ -1,19 +1,19 @@
 import React, { useState, useMemo, useEffect } from "react";
-import MuiAvatar from '@mui/material/Avatar';
-import MuiListItemAvatar from '@mui/material/ListItemAvatar';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListSubheader from '@mui/material/ListSubheader';
-import Select, { SelectChangeEvent, selectClasses } from '@mui/material/Select';
-import Divider from '@mui/material/Divider';
-import { styled } from '@mui/material/styles';
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import DevicesRoundedIcon from '@mui/icons-material/DevicesRounded';
-import SmartphoneRoundedIcon from '@mui/icons-material/SmartphoneRounded';
-import ConstructionRoundedIcon from '@mui/icons-material/ConstructionRounded';
-import Applogo from '../theme/assets/event-logo.png';
-import ApplogoSmall from '../theme/assets/event-logo-small.png';
+import MuiAvatar from "@mui/material/Avatar";
+import MuiListItemAvatar from "@mui/material/ListItemAvatar";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListSubheader from "@mui/material/ListSubheader";
+import Select, { SelectChangeEvent, selectClasses } from "@mui/material/Select";
+import Divider from "@mui/material/Divider";
+import { styled } from "@mui/material/styles";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import DevicesRoundedIcon from "@mui/icons-material/DevicesRounded";
+import SmartphoneRoundedIcon from "@mui/icons-material/SmartphoneRounded";
+import ConstructionRoundedIcon from "@mui/icons-material/ConstructionRounded";
+import Applogo from "../theme/assets/event-logo.png";
+import ApplogoSmall from "../theme/assets/event-logo-small.png";
 import bus from "../bus";
 
 const Avatar = styled(MuiAvatar)(({ theme }) => ({
@@ -30,24 +30,24 @@ const ListItemAvatar = styled(MuiListItemAvatar)({
 });
 
 export default function SelectContent() {
-  const [company, setCompany] = React.useState('');
+  const [company, setCompany] = React.useState("");
   const [IsCollapsed, setIsCollapsed] = useState(false);
   let is_collapsed = localStorage.getItem("is_collapsed");
   const parsedIsCollapsed = is_collapsed ? JSON.parse(is_collapsed) : false;
 
   useEffect(() => {
     if (parsedIsCollapsed !== null) {
-      console.log('parsedIsCollapsed:', parsedIsCollapsed);
+      console.log("parsedIsCollapsed:", parsedIsCollapsed);
       setIsCollapsed(parsedIsCollapsed);
     }
 
     bus.on("notify_collapse", (val) => {
       if (val) {
-        console.log('setIsCollapsed val:', val);
-        if (val === 'true') {
+        console.log("setIsCollapsed val:", val);
+        if (val === "true") {
           setIsCollapsed(true);
-        } 
-        if (val === 'false') {
+        }
+        if (val === "false") {
           setIsCollapsed(false);
         }
       }
@@ -58,13 +58,20 @@ export default function SelectContent() {
     setCompany(event.target.value as string);
   };
 
-
   return (
     <>
-    <div className="w-100">
-      {/* <img src={`https://www.kindpng.com/picc/m/192-1926933_events-logo-png-event-management-transparent-png.png`} alt="App Logo" className="d-block mx-auto" width="120" /> */}
-      <img src={`${IsCollapsed ? ApplogoSmall : Applogo}`} alt="App Logo" className="d-block mx-auto" width={`${IsCollapsed ? 30 : 120}`} />
-    </div>
+      <div className="w-100" style={{width: '100%'}}>
+        {/* <img src={`https://www.kindpng.com/picc/m/192-1926933_events-logo-png-event-management-transparent-png.png`} alt="App Logo" className="d-block mx-auto" width="120" /> */}
+        <img
+          src={`${IsCollapsed ? ApplogoSmall : Applogo}`}
+          alt="App Logo"
+          width={`${IsCollapsed ? 30 : 120}`}
+          style={{
+            display: 'block',
+            margin: '0 auto'
+          }}
+        />
+      </div>
     </>
     // <Select
     //   labelId="company-select"

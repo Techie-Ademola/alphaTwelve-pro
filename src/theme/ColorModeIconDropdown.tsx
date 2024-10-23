@@ -21,7 +21,7 @@ const StyledWrapper = styled.div`
     position: relative;
     width: 22px;
     height: 15px;
-    background-color: rgb(82, 82, 82);
+    background-color: rgba(226, 232, 240, 1);
     border-radius: 20px;
     cursor: pointer;
     transition-duration: 0.2s;
@@ -63,30 +63,29 @@ export default function ColorModeSwitch({ iscollapsed }: ColorModeSwitchProps) {
   const { mode, setMode } = useColorScheme();
 
   if (!mode) {
-    console.log('it is not mode');
-    
     return null; // or return a loading state
   }
 
   const handleChange = () => {
-    console.log('handleChange called');
     setMode(mode === 'dark' ? 'light' : 'dark'); // Toggle between light and dark mode
     bus.emit("emit_mode_status", mode === 'dark' ? 'light' : 'dark');
-    console.log('handleChange called to return');
   };
 
   return (
     <>
       <ListItem disablePadding sx={{ display: 'block', cursor: 'pointer', px: 0 }} onClick={handleChange} className="mode_toggler">
         <ListItemButton sx={{ px: 0, mx: 0 }}>
-          <div className="d-flex align-items-center" style={{ padding: '7px 6px' }}>
+          <div className="" style={{ padding: '7px 6px', display: 'flex', alignItems: 'center' }}>
             {!iscollapsed ? (
               <span></span>
             ) : (
               <ListItemText primary={`a`} className="no_show" style={{ opacity: '0', width: '0px', padding: '0px 5px' }} />
             )}
 
-            <StyledWrapper>
+            <StyledWrapper
+                style={{
+                  transform: 'translateY(1px)',
+                }}>
               <input
                 type="checkbox"
                 id="checkboxInput"
@@ -98,7 +97,7 @@ export default function ColorModeSwitch({ iscollapsed }: ColorModeSwitchProps) {
             </StyledWrapper>
 
             {!iscollapsed ? (
-              <ListItemText primary={`${mode === 'dark' ? 'Dark' : 'Light'} mode`} sx={{ mx: 1 }} />
+              <ListItemText primary={`${mode === 'dark' || mode === 'system' ? 'Dark' : 'Light'} mode`} sx={{ mx: 1 }} />
             ) : (
               <ListItemText primary={`a`} className="no_show" style={{ opacity: '0', width: '0px', padding: '0px 1px' }} />
             )}

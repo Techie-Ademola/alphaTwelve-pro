@@ -6,6 +6,10 @@ import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { LineChart } from '@mui/x-charts/LineChart';
+import Carousel from './Carousel';
+import Img01 from "../theme/assets/carousel_img01.jpeg";
+import Img02 from "../theme/assets/carousel_img02.jpeg";
+import Img03 from "../theme/assets/carousel_img03.jpeg";
 
 function AreaGradient({ color, id }: { color: string; id: string }) {
   return (
@@ -44,8 +48,66 @@ export default function SessionsChart() {
   ];
 
   return (
-    <Card variant="outlined" sx={{ width: '100%' }}>
-      <CardContent>
+    <Card variant="outlined" sx={{ width: '100%', p: 0 }}>
+      <div id="carouselExampleIndicators" className="carousel slide carousel-fade styled_carousel" data-ride="carousel" data-pause="false" data-interval="4000">
+        <ol className="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img src={Img01} className="d-block w-100" alt="..." />
+            <div className="w-100 caption_box p-4 pb-5">
+              <p className="mb-3">Latest News & Updates 01</p>
+              <span className="d-block">
+                Turpis interdum nunc varius ornare dignissim pretium. Massa ornare quis aliquet sed vitae. Sed velit nisi, fermentum erat. Fringilla purus, erat fringilla tincidunt quisque non. Pellentesque in ut tellus.
+              </span>
+            </div>
+          </div>
+          <div className="carousel-item">
+            <img src={Img02} className="d-block w-100" alt="..." />
+            <div className="w-100 caption_box p-4 pb-5">
+              <p className="mb-3">Latest News & Updates 02</p>
+              <span className="d-block">
+                Turpis interdum nunc varius ornare dignissim pretium. Massa ornare quis aliquet sed vitae. Sed velit nisi, fermentum erat. Fringilla purus, erat fringilla tincidunt quisque non. Pellentesque in ut tellus.
+              </span>
+            </div>
+          </div>
+          <div className="carousel-item">
+            <img src={Img03} className="d-block w-100" alt="..." />
+            <div className="w-100 caption_box p-4 pb-5">
+              <p className="mb-3">Latest News & Updates 03</p>
+              <span className="d-block">
+                Turpis interdum nunc varius ornare dignissim pretium. Massa ornare quis aliquet sed vitae. Sed velit nisi, fermentum erat. Fringilla purus, erat fringilla tincidunt quisque non. Pellentesque in ut tellus.
+              </span>
+            </div>
+          </div>
+        </div>
+        <button className="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+          <span className="carousel-control-prev-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" fill="white" />
+              <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" stroke="#E2E8F0" />
+              <path d="M12.625 10.375L10.875 12L12.625 13.625" stroke="#334155" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+          </span>
+          <span className="sr-only">Previous</span>
+        </button>
+        <button className="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+          <span className="carousel-control-next-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" fill="white" />
+              <rect x="0.5" y="0.5" width="23" height="23" rx="11.5" stroke="#E2E8F0" />
+              <path d="M11.375 10.375L13.125 12L11.375 13.625" stroke="#334155" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+          </span>
+          <span className="sr-only">Next</span>
+        </button>
+      </div>
+      {/* <CardContent>
         <Typography component="h2" variant="subtitle2" gutterBottom>
           Sessions
         </Typography>
@@ -144,7 +206,7 @@ export default function SessionsChart() {
           <AreaGradient color={theme.palette.primary.main} id="referral" />
           <AreaGradient color={theme.palette.primary.light} id="direct" />
         </LineChart>
-      </CardContent>
+      </CardContent> */}
     </Card>
   );
 }

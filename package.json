@@ -14,12 +14,17 @@
     "bootstrap": "^4.6.0",
     "clsx": "latest",
     "dayjs": "latest",
+    "file-saver": "^2.0.5",
     "mitt": "^3.0.0",
+    "polished": "^4.3.1",
     "react": "latest",
     "react-dom": "latest",
+    "react-slick": "^0.30.2",
     "styled-components": "^6.1.13"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.7",
+    "@types/react-slick": "^0.23.13",
     "react-scripts": "^5.0.1"
   },
   "scripts": {
