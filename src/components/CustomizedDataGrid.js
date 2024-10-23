@@ -1,54 +1,4 @@
-// import * as React from 'react';
-// import { DataGrid } from '@mui/x-data-grid';
-// import { columns, rows } from '../internals/data/gridData';
-
-// export default function CustomizedDataGrid() {
-//   return (
-//     <DataGrid
-//       autoHeight
-//       checkboxSelection
-//       rows={rows}
-//       columns={columns}
-//       getRowClassName={(params) =>
-//         params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
-//       }
-//       initialState={{
-//         pagination: { paginationModel: { pageSize: 20 } },
-//       }}
-//       pageSizeOptions={[10, 20, 50]}
-//       disableColumnResize
-//       density="compact"
-//       slotProps={{
-//         filterPanel: {
-//           filterFormProps: {
-//             logicOperatorInputProps: {
-//               variant: 'outlined',
-//               size: 'small',
-//             },
-//             columnInputProps: {
-//               variant: 'outlined',
-//               size: 'small',
-//               sx: { mt: 'auto' },
-//             },
-//             operatorInputProps: {
-//               variant: 'outlined',
-//               size: 'small',
-//               sx: { mt: 'auto' },
-//             },
-//             valueInputProps: {
-//               InputComponentProps: {
-//                 variant: 'outlined',
-//                 size: 'small',
-//               },
-//             },
-//           },
-//         },
-//       }}
-//     />
-//   );
-// }
-
-import * as React from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { DataGrid, GridToolbar, GridFilterModel } from "@mui/x-data-grid";
 import {
   TextField,
@@ -63,6 +13,7 @@ import { columns, rows as initialRows } from "../internals/data/gridData";
 import { saveAs } from "file-saver";
 import CustomDatePicker from "./CustomDatePicker";
 import dayjs from "dayjs";
+import bus from "../bus";
 
 export default function CustomizedDataGrid() {
   const [searchText, setSearchText] = React.useState("");
@@ -72,6 +23,29 @@ export default function CustomizedDataGrid() {
   const [sortOrder, setSortOrder] = React.useState("desc");
   const [pageSize, setPageSize] = React.useState(10);
   const [currentPage, setCurrentPage] = React.useState(0);
+  const [mui_mode, setMuiMode] = useState(localStorage.getItem("mui-mode"));
+  const [modeStatus, setModeStatus] = useState('');
+
+  let is_collapsed = localStorage.getItem("is_collapsed");
+  const parsedIsCollapsed = is_collapsed ? JSON.parse(is_collapsed) : false;
+
+
+  useEffect(() => {
+    console.log('mui_mode', mui_mode);
+    if (mui_mode)
+      setModeStatus(mui_mode);
+  }, []);
+
+
+  useEffect(() => {
+    bus.on("emit_mode_status", (val) => {
+      console.log('val:', val);
+
+      if (val !== null && (val === 'light' || val === 'dark')) {
+        setModeStatus(val);
+      }
+    });
+  }, []);
 
   // Filtered Rows based on search, status, and date filters
   const filteredRows = initialRows.filter((row) => {
@@ -147,11 +121,14 @@ export default function CustomizedDataGrid() {
     <Box sx={{ height: "auto", width: "100%" }}>
       {/* Filters and Sorting Section */}
       <Box
-        sx={{ display: "flex", justifyContent: "space-between", gap: 2, mb: 2 }}
+        sx={{ justifyContent: "space-between", gap: 2, mb: 2 }}
+        className="d-md-flex"
       >
         {/* Search Input */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
-          <div className="position-relative search_input_wrap">
+        <Box sx={{ alignItems: "center", gap: 1, mb: 2 }}
+        className="d-md-flex"
+        >
+          <div className="position-relative search_input_wrap mb-2">
             <i className="bi bi-search"></i>
             <input
               placeholder="Search..."
@@ -187,9 +164,9 @@ export default function CustomizedDataGrid() {
 
           {/* Status Filter */}
           <FormControl
-            className="status_Filter"
             size="small"
             sx={{ minWidth: 120 }}
+            className="status_Filter mx-2 mx-md-0"
           >
             {/* <InputLabel>Status</InputLabel> */}
             <Select
@@ -203,7 +180,7 @@ export default function CustomizedDataGrid() {
             </Select>
           </FormControl>
           {/* Display the number of results */}
-          <Box sx={{ mb: 0, fontWeight: "500", fontSize: "14px" }}>
+          <Box sx={{ mb: 0, fontWeight: "500", fontSize: "14px" }} className="mt-3 mt-md-0">
             Displaying {paginatedRows.length} results
           </Box>
         </Box>
@@ -211,7 +188,7 @@ export default function CustomizedDataGrid() {
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
           {/* Sort Order */}
           <Box sx={{ mb: 0, fontSize: "14px" }}>Sort:</Box>
-          <FormControl size="small" sx={{ minWidth: 120 }}>
+          <FormControl size="small" sx={{ minWidth: 120 }} >
             {/* <InputLabel>Sort By</InputLabel> */}
             <Select
               value={sortOrder}
@@ -226,7 +203,7 @@ export default function CustomizedDataGrid() {
           <Button
             variant="outlined"
             color="primary"
-            className="rounded-0 px-0 fit-content"
+            className="rounded-0 px-0 fit-content d-none d-md-block"
             style={{ width: "fit-content" }}
           >
             <svg
@@ -238,15 +215,15 @@ export default function CustomizedDataGrid() {
             >
               <path
                 d="M10.4166 5.83333C10.4166 6.06345 10.2301 6.25 9.99998 6.25C9.76986 6.25 9.58331 6.06345 9.58331 5.83333C9.58331 5.60321 9.76986 5.41666 9.99998 5.41666C10.2301 5.41666 10.4166 5.60321 10.4166 5.83333Z"
-                stroke="#141414"
+                stroke={`${modeStatus === 'light' ? '#141414' : '#fff'}`}
               />
               <path
                 d="M10.4166 10C10.4166 10.2301 10.2301 10.4167 9.99998 10.4167C9.76986 10.4167 9.58331 10.2301 9.58331 10C9.58331 9.76988 9.76986 9.58333 9.99998 9.58333C10.2301 9.58333 10.4166 9.76988 10.4166 10Z"
-                stroke="#141414"
+                stroke={`${modeStatus === 'light' ? '#141414' : '#fff'}`}
               />
               <path
                 d="M10.4166 14.1667C10.4166 14.3968 10.2301 14.5833 9.99998 14.5833C9.76986 14.5833 9.58331 14.3968 9.58331 14.1667C9.58331 13.9365 9.76986 13.75 9.99998 13.75C10.2301 13.75 10.4166 13.9365 10.4166 14.1667Z"
-                stroke="#141414"
+                stroke={`${modeStatus === 'light' ? '#141414' : '#fff'}`}
               />
             </svg>
           </Button>
@@ -267,7 +244,7 @@ export default function CustomizedDataGrid() {
             >
               <path
                 d="M3.16663 9.83333V10.8333C3.16663 11.9379 4.06206 12.8333 5.16663 12.8333H10.8333C11.9379 12.8333 12.8333 11.9379 12.8333 10.8333V9.83333M7.99996 9.5V3.16666M7.99996 9.5L5.83329 7.16666M7.99996 9.5L10.1666 7.16666"
-                stroke="#141414"
+                stroke={`${modeStatus === 'light' ? '#141414' : '#fff'}`}
                 stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -279,7 +256,7 @@ export default function CustomizedDataGrid() {
       </Box>
 
       {/* DataGrid */}
-      <div className="position-relative">
+      <div className="position-relative w-100" style={{overflowX: 'auto'}}>
         <DataGrid
           autoHeight
           // checkboxSelection
@@ -301,6 +278,7 @@ export default function CustomizedDataGrid() {
           disableColumnResize
           // density="compact"
           pagination
+          style={{minWidth: '60em'}}
           // slotProps={{
           //   filterPanel: {
           //     filterFormProps: {
@@ -361,3 +339,54 @@ export default function CustomizedDataGrid() {
     </Box>
   );
 }
+
+
+// import * as React from 'react';
+// import { DataGrid } from '@mui/x-data-grid';
+// import { columns, rows } from '../internals/data/gridData';
+
+// export default function CustomizedDataGrid() {
+//   return (
+//     <DataGrid
+//       autoHeight
+//       checkboxSelection
+//       rows={rows}
+//       columns={columns}
+//       getRowClassName={(params) =>
+//         params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
+//       }
+//       initialState={{
+//         pagination: { paginationModel: { pageSize: 20 } },
+//       }}
+//       pageSizeOptions={[10, 20, 50]}
+//       disableColumnResize
+//       density="compact"
+//       slotProps={{
+//         filterPanel: {
+//           filterFormProps: {
+//             logicOperatorInputProps: {
+//               variant: 'outlined',
+//               size: 'small',
+//             },
+//             columnInputProps: {
+//               variant: 'outlined',
+//               size: 'small',
+//               sx: { mt: 'auto' },
+//             },
+//             operatorInputProps: {
+//               variant: 'outlined',
+//               size: 'small',
+//               sx: { mt: 'auto' },
+//             },
+//             valueInputProps: {
+//               InputComponentProps: {
+//                 variant: 'outlined',
+//                 size: 'small',
+//               },
+//             },
+//           },
+//         },
+//       }}
+//     />
+//   );
+// }

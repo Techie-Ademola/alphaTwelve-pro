@@ -5,11 +5,6 @@
     font-style: normal;
 }
 
-html,
-body {
-    /* background: hsla(220, 35%, 3%, 1); */
-}
-
 html[data-mui-color-scheme="light"],
 html[data-mui-color-scheme="light"] body {
     background: rgba(255, 255, 255, 1);
@@ -17,7 +12,7 @@ html[data-mui-color-scheme="light"] body {
 
 html[data-mui-color-scheme="dark"],
 html[data-mui-color-scheme="dark"] body {
-    background: rgba(255, 255, 255, 1);
+    background: #05070a;
 }
 
 .sidebar_drawer div {
@@ -334,5 +329,8 @@ html[data-mui-color-scheme="dark"] .MuiBox-root
 
     .collapse_navitem {
         display: none;
+    }
+    .search_input {
+        width: 100%;
     }
 }
