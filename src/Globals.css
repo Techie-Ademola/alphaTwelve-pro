@@ -97,8 +97,13 @@ html[data-mui-color-scheme="light"] .sidebar_wrap .Mui-selected {
 /* Carousel styles */
 
 .styled_carousel .carousel-item {
+    height: 410px;
     max-height: 410px;
     position: relative;
+}
+
+.styled_carousel .carousel-item img {
+    height: 100%;
 }
 
 .styled_carousel .carousel-control-prev,
@@ -161,12 +166,16 @@ html[data-mui-color-scheme="light"] .sidebar_wrap .Mui-selected {
 
 .search_input {
     box-shadow: none !important;
-    border: 1px solid hsla(220, 20%, 80%, 0.4);
+    border: 1px solid hsl(220, 20%, 25%);
     outline: none !important;
     padding: 8px 10px !important;
     font-size: 14px;
     text-indent: 25px;
     min-width: 210px;
+}
+
+html[data-mui-color-scheme="light"] .search_input {
+    border-color: hsl(220, 20%, 88%) !important;
 }
 
 .search_input::placeholder {
@@ -193,22 +202,26 @@ html[data-mui-color-scheme="light"] .sidebar_wrap .Mui-selected {
     background-color: transparent !important;
     box-shadow: none !important;
 }
+
 .MuiToolbar-root p {
     margin-bottom: 0 !important;
 }
+
 .MuiFormControl-root,
-.MuiFormControl-root
- * {
+.MuiFormControl-root * {
     box-shadow: none !important;
-outline: none !important;
+    outline: none !important;
 }
+
 .status_Filter * {
     box-shadow: none !important;
-outline: none !important;
+    outline: none !important;
 }
+
 .date_filterbutton svg {
     display: none;
 }
+
 .fit-content {
     min-width: 40px !important;
 }
@@ -236,6 +249,7 @@ outline: none !important;
 .MuiDataGrid-selectedRowCount {
     display: none;
 }
+
 /* .MuiDataGrid-virtualScroller,
 .MuiDataGrid-virtualScrollerContent,
 .MuiDataGrid-virtualScrollerRenderZone {
@@ -305,15 +319,50 @@ html[data-mui-color-scheme="dark"] .status_text.inprogress {
 .status_text.inprogress::before {
     background-color: rgba(59, 130, 246, 1);
 }
-html[data-mui-color-scheme="dark"] h2, 
-html[data-mui-color-scheme="dark"] h3, 
-html[data-mui-color-scheme="dark"] p, 
-html[data-mui-color-scheme="dark"] .MuiBox-root 
-{
+
+html[data-mui-color-scheme="dark"] h2,
+html[data-mui-color-scheme="dark"] h3,
+html[data-mui-color-scheme="dark"] p,
+html[data-mui-color-scheme="dark"] .MuiBox-root {
     color: #fff;
+}
+html[data-mui-color-scheme="light"]
+.speakerAvatars img {
+    border: 3px solid white;
+    position: relative;
+}
+html[data-mui-color-scheme="dark"]
+.speakerAvatars img {
+    border: 3px solid #05070a;
+    position: relative;
+}
+
+.speakerAvatars img:nth-of-type(1) {
+    z-index: 10;
+}
+
+.speakerAvatars img:nth-of-type(2) {
+    transform: translateX(-15px);
+    z-index: 8;
+}
+
+.speakerAvatars img:nth-of-type(3) {
+    transform: translateX(-30px);
+    z-index: 6;
 }
 
 @media screen and (max-width: 576px) {
+
+    .MuiDataGrid-cell {
+        white-space: nowrap !important;
+        overflow-x: hidden !important;
+        text-overflow: ellipsis;
+    }
+
+    .MuiGrid2-root {
+        width: 100% !important;
+    }
+
     .styled_carousel img {
         min-height: 248px !important;
     }
@@ -323,6 +372,14 @@ html[data-mui-color-scheme="dark"] .MuiBox-root
         position: relative;
     }
 
+    .styled_carousel .carousel-item img {
+        width: auto !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(-100px);
+    }
+
     .carousel-item {
         background: #ADA9BB;
     }
@@ -330,7 +387,22 @@ html[data-mui-color-scheme="dark"] .MuiBox-root
     .collapse_navitem {
         display: none;
     }
+
     .search_input {
         width: 100%;
+    }
+
+    .date_filterbutton {
+        border-radius: 0 !important;
+        padding: 18px 10px !important;
+        min-width: 100% !important;
+        width: 100% !important;
+        text-align: left !important;
+        justify-content: start !important;
+        position: relative;
+    }
+    .footer_wrap button {
+        width: 100% !important;
+        margin-bottom: 10px;
     }
 }

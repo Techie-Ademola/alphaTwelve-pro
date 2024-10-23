@@ -1,15 +1,15 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Chip from '@mui/material/Chip';
-import { GridCellParams, GridRowsProp, GridColDef } from '@mui/x-data-grid';
-import { SparkLineChart } from '@mui/x-charts/SparkLineChart';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
+import { GridCellParams, GridRowsProp, GridColDef } from "@mui/x-data-grid";
+import { SparkLineChart } from "@mui/x-charts/SparkLineChart";
 
 type SparkLineData = number[];
 
 function getDaysInMonth(month: number, year: number) {
   const date = new Date(year, month, 0);
-  const monthName = date.toLocaleDateString('en-US', {
-    month: 'short',
+  const monthName = date.toLocaleDateString("en-US", {
+    month: "short",
   });
   const daysInMonth = date.getDate();
   const days = [];
@@ -30,7 +30,7 @@ function renderSparklineCell(params: GridCellParams<SparkLineData, any>) {
   }
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+    <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
       <SparkLineChart
         data={value}
         width={colDef.computedWidth || 100}
@@ -38,9 +38,9 @@ function renderSparklineCell(params: GridCellParams<SparkLineData, any>) {
         plotType="bar"
         showHighlight
         showTooltip
-        colors={['hsl(210, 98%, 42%)']}
+        colors={["hsl(210, 98%, 42%)"]}
         xAxis={{
-          scaleType: 'band',
+          scaleType: "band",
           data,
         }}
       />
@@ -48,29 +48,29 @@ function renderSparklineCell(params: GridCellParams<SparkLineData, any>) {
   );
 }
 
-function renderStatus(status: 'Online' | 'Offline') {
-  const colors: { [index: string]: 'success' | 'default' } = {
-    Online: 'success',
-    Offline: 'default',
+function renderStatus(status: "Online" | "Offline") {
+  const colors: { [index: string]: "success" | "default" } = {
+    Online: "success",
+    Offline: "default",
   };
 
   return <Chip label={status} color={colors[status]} size="small" />;
 }
 
 export function renderAvatar(
-  params: GridCellParams<{ name: string; color: string }, any, any>,
+  params: GridCellParams<{ name: string; color: string }, any, any>
 ) {
   if (params.value == null) {
-    return '';
+    return "";
   }
 
   return (
     <Avatar
       sx={{
         backgroundColor: params.value.color,
-        width: '24px',
-        height: '24px',
-        fontSize: '0.85rem',
+        width: "24px",
+        height: "24px",
+        fontSize: "0.85rem",
       }}
     >
       {params.value.name.toUpperCase().substring(0, 1)}
@@ -637,73 +637,705 @@ export function renderAvatar(
 
 // src/internals/data/gridData.ts
 
-
-
 export const columns: GridColDef[] = [
-  { field: 'eventName', headerName: 'Event Name', flex: 1, sortable: true },
-  { field: 'date', headerName: 'Date', flex: 1, sortable: true },
-  { field: 'speaker', headerName: 'Speaker', flex: 1 },
-  { 
-    field: 'status', 
-    headerName: 'Status', 
-    flex: 1, 
+  { field: "eventName", headerName: "Event Name", flex: 1, sortable: true },
+  { field: "date", headerName: "Date", flex: 1, sortable: true },
+  { field: "speaker", headerName: "Speaker", flex: 1 },
+  {
+    field: "status",
+    headerName: "Status",
+    flex: 1,
     renderCell: (params) => (
-      <span className={`${params.value === 'Completed' ? 'success' : 'inprogress'} status_text`} style={{ color: params.value === 'Completed' ? 'green' : 'blue' }}>
+      <span
+        className={`${
+          params.value === "Completed" ? "success" : "inprogress"
+        } status_text`}
+        style={{ color: params.value === "Completed" ? "green" : "blue" }}
+      >
         {params.value}
       </span>
-    )
+    ),
   },
 ];
 
 export const rows: GridRowsProp = [
-  { id: 1, eventName: 'Cloud Innovation Summit', date: '2024-10-15', speaker: 'Jane Doe', status: 'Completed' },
-  { id: 2, eventName: 'Blockchain Revolution Conference', date: '2024-11-05', speaker: 'Dr. Peter Smith', status: 'In Progress' },
-  { id: 3, eventName: 'AI in Healthcare Symposium', date: '2024-12-01', speaker: 'Dr. Aisha Malik', status: 'In Progress' },
-  { id: 4, eventName: 'Future of Fintech Forum', date: '2024-10-25', speaker: 'John Lee', status: 'Completed' },
-  { id: 5, eventName: 'Data Analytics in Business', date: '2024-11-12', speaker: 'Rachel Moore', status: 'Completed' },
-  { id: 6, eventName: 'Sustainable Energy Expo', date: '2024-09-28', speaker: 'Prof. Alan Green', status: 'Completed' },
-  { id: 7, eventName: 'Web3 Interfaces Workshop', date: '2024-10-10', speaker: 'Kevin Adams', status: 'In Progress' },
-  { id: 8, eventName: 'Cybersecurity for Startups', date: '2024-11-19', speaker: 'Emily Zhang', status: 'Completed' },
-  { id: 9, eventName: 'Smart Cities Forum', date: '2024-10-18', speaker: 'Dr. Maria Hernandez', status: 'In Progress' },
-  { id: 10, eventName: 'Tech Safari Mixer', date: '2024-09-30', speaker: 'Guest Panel', status: 'In Progress' },
+  {
+    id: 1,
+    eventName: "Cloud Innovation Summit",
+    date: "2024-10-15",
+    speaker: "Jane Doe",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 2,
+    eventName: "Blockchain Revolution Conference",
+    date: "2024-11-05",
+    speaker: "Dr. Peter Smith",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 3,
+    eventName: "AI in Healthcare Symposium",
+    date: "2024-12-01",
+    speaker: "Dr. Aisha Malik",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 4,
+    eventName: "Future of Fintech Forum",
+    date: "2024-10-25",
+    speaker: "John Lee",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 5,
+    eventName: "Data Analytics in Business",
+    date: "2024-11-12",
+    speaker: "Rachel Moore",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 6,
+    eventName: "Sustainable Energy Expo",
+    date: "2024-09-28",
+    speaker: "Prof. Alan Green",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 7,
+    eventName: "Web3 Interfaces Workshop",
+    date: "2024-10-10",
+    speaker: "Kevin Adams",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 8,
+    eventName: "Cybersecurity for Startups",
+    date: "2024-11-19",
+    speaker: "Emily Zhang",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 9,
+    eventName: "Smart Cities Forum",
+    date: "2024-10-18",
+    speaker: "Dr. Maria Hernandez",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 10,
+    eventName: "Tech Safari Mixer",
+    date: "2024-09-30",
+    speaker: "Guest Panel",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
 
-  { id: 11, eventName: 'Cloud Summit', date: '2024-10-15', speaker: 'Jane Doe', status: 'Completed' },
-  { id: 12, eventName: 'Blockchain Conference', date: '2024-11-05', speaker: 'Dr. Peter Smith', status: 'In Progress' },
-  { id: 13, eventName: 'AI in Technology Symposium', date: '2024-12-01', speaker: 'Dr. Aisha Malik', status: 'In Progress' },
-  { id: 14, eventName: 'Future of MFB Forum', date: '2024-10-25', speaker: 'John Lee', status: 'Completed' },
-  { id: 15, eventName: 'Data Manipulation in Business', date: '2024-11-12', speaker: 'Rachel Moore', status: 'Completed' },
-  { id: 16, eventName: 'Sustainable Energy Expo', date: '2024-09-28', speaker: 'Prof. Alan Green', status: 'Completed' },
-  { id: 17, eventName: 'Web3 Interfaces Workshop', date: '2024-10-10', speaker: 'Kevin Adams', status: 'In Progress' },
-  { id: 18, eventName: 'Cybersecurity for Startups', date: '2024-11-19', speaker: 'Emily Zhang', status: 'Completed' },
-  { id: 19, eventName: 'Smart Cities Forum', date: '2024-10-18', speaker: 'Dr. Maria Hernandez', status: 'In Progress' },
-  { id: 20, eventName: 'Tech Safari Mixer', date: '2024-09-30', speaker: 'Guest Panel', status: 'In Progress' },
+  {
+    id: 11,
+    eventName: "Cloud Summit",
+    date: "2024-10-15",
+    speaker: "Jane Doe",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 12,
+    eventName: "Blockchain Conference",
+    date: "2024-11-05",
+    speaker: "Dr. Peter Smith",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 13,
+    eventName: "AI in Technology Symposium",
+    date: "2024-12-01",
+    speaker: "Dr. Aisha Malik",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 14,
+    eventName: "Future of MFB Forum",
+    date: "2024-10-25",
+    speaker: "John Lee",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 15,
+    eventName: "Data Manipulation in Business",
+    date: "2024-11-12",
+    speaker: "Rachel Moore",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 16,
+    eventName: "Sustainable Energy Expo",
+    date: "2024-09-28",
+    speaker: "Prof. Alan Green",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 17,
+    eventName: "Web3 Interfaces Workshop",
+    date: "2024-10-10",
+    speaker: "Kevin Adams",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 18,
+    eventName: "Cybersecurity for Startups",
+    date: "2024-11-19",
+    speaker: "Emily Zhang",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 19,
+    eventName: "Smart Cities Forum",
+    date: "2024-10-18",
+    speaker: "Dr. Maria Hernandez",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 20,
+    eventName: "Tech Safari Mixer",
+    date: "2024-09-30",
+    speaker: "Guest Panel",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
 
-  { id: 21, eventName: 'Cloud Innovation Summit', date: '2024-10-15', speaker: 'Jane Doe', status: 'Completed' },
-  { id: 22, eventName: 'Blockchain Revolution Conference', date: '2024-11-05', speaker: 'Dr. Peter Smith', status: 'In Progress' },
-  { id: 23, eventName: 'AI in Healthcare Symposium', date: '2024-12-01', speaker: 'Dr. Aisha Malik', status: 'In Progress' },
-  { id: 24, eventName: 'Future of Fintech Forum', date: '2024-10-25', speaker: 'John Lee', status: 'Completed' },
-  { id: 25, eventName: 'Data Analytics in Business', date: '2024-11-12', speaker: 'Rachel Moore', status: 'Completed' },
-  { id: 26, eventName: 'Sustainable Energy Expo', date: '2024-09-28', speaker: 'Prof. Alan Green', status: 'Completed' },
-  { id: 27, eventName: 'Web3 Interfaces Workshop', date: '2024-10-10', speaker: 'Kevin Adams', status: 'In Progress' },
-  { id: 28, eventName: 'Cybersecurity for Startups', date: '2024-11-19', speaker: 'Emily Zhang', status: 'Completed' },
-  { id: 29, eventName: 'Smart Cities Forum', date: '2024-10-18', speaker: 'Dr. Maria Hernandez', status: 'In Progress' },
-  { id: 30, eventName: 'Tech Safari Mixer', date: '2024-09-30', speaker: 'Guest Panel', status: 'In Progress' },
+  {
+    id: 21,
+    eventName: "Cloud Innovation Summit",
+    date: "2024-10-15",
+    speaker: "Jane Doe",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 22,
+    eventName: "Blockchain Revolution Conference",
+    date: "2024-11-05",
+    speaker: "Dr. Peter Smith",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 23,
+    eventName: "AI in Healthcare Symposium",
+    date: "2024-12-01",
+    speaker: "Dr. Aisha Malik",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 24,
+    eventName: "Future of Fintech Forum",
+    date: "2024-10-25",
+    speaker: "John Lee",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 25,
+    eventName: "Data Analytics in Business",
+    date: "2024-11-12",
+    speaker: "Rachel Moore",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 26,
+    eventName: "Sustainable Energy Expo",
+    date: "2024-09-28",
+    speaker: "Prof. Alan Green",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 27,
+    eventName: "Web3 Interfaces Workshop",
+    date: "2024-10-10",
+    speaker: "Kevin Adams",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 28,
+    eventName: "Cybersecurity for Startups",
+    date: "2024-11-19",
+    speaker: "Emily Zhang",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 29,
+    eventName: "Smart Cities Forum",
+    date: "2024-10-18",
+    speaker: "Dr. Maria Hernandez",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 30,
+    eventName: "Tech Safari Mixer",
+    date: "2024-09-30",
+    speaker: "Guest Panel",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
 
-  { id: 31, eventName: 'Cloud Innovation Summit', date: '2024-10-15', speaker: 'Jane Doe', status: 'Completed' },
-  { id: 32, eventName: 'Blockchain Revolution Conference', date: '2024-11-05', speaker: 'Dr. Peter Smith', status: 'In Progress' },
-  { id: 33, eventName: 'AI in Healthcare Symposium', date: '2024-12-01', speaker: 'Dr. Aisha Malik', status: 'In Progress' },
-  { id: 34, eventName: 'Future of Fintech Forum', date: '2024-10-25', speaker: 'John Lee', status: 'Completed' },
-  { id: 35, eventName: 'Data Analytics in Business', date: '2024-11-12', speaker: 'Rachel Moore', status: 'Completed' },
-  { id: 36, eventName: 'Sustainable Energy Expo', date: '2024-09-28', speaker: 'Prof. Alan Green', status: 'Completed' },
-  { id: 37, eventName: 'Web3 Interfaces Workshop', date: '2024-10-10', speaker: 'Kevin Adams', status: 'In Progress' },
-  { id: 38, eventName: 'Cybersecurity for Startups', date: '2024-11-19', speaker: 'Emily Zhang', status: 'Completed' },
-  { id: 39, eventName: 'Smart Cities Forum', date: '2024-10-18', speaker: 'Dr. Maria Hernandez', status: 'In Progress' },
-  { id: 40, eventName: 'Tech Safari Mixer', date: '2024-09-30', speaker: 'Guest Panel', status: 'In Progress' },
-  
-  { id: 41, eventName: 'Sustainable Energy Expo', date: '2024-09-28', speaker: 'Prof. Alan Green', status: 'Completed' },
-  { id: 42, eventName: 'Web3 Interfaces Workshop', date: '2024-10-10', speaker: 'Kevin Adams', status: 'In Progress' },
-  { id: 43, eventName: 'Cybersecurity for Startups', date: '2024-11-19', speaker: 'Emily Zhang', status: 'Completed' },
-  { id: 44, eventName: 'Smart Cities Forum', date: '2024-10-18', speaker: 'Dr. Maria Hernandez', status: 'In Progress' },
-  { id: 45, eventName: 'Tech Safari Mixer', date: '2024-09-30', speaker: 'Guest Panel', status: 'In Progress' },
-  
+  {
+    id: 31,
+    eventName: "Cloud Innovation Summit",
+    date: "2024-10-15",
+    speaker: "Jane Doe",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 32,
+    eventName: "Blockchain Revolution Conference",
+    date: "2024-11-05",
+    speaker: "Dr. Peter Smith",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 33,
+    eventName: "AI in Healthcare Symposium",
+    date: "2024-12-01",
+    speaker: "Dr. Aisha Malik",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 34,
+    eventName: "Future of Fintech Forum",
+    date: "2024-10-25",
+    speaker: "John Lee",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 35,
+    eventName: "Data Analytics in Business",
+    date: "2024-11-12",
+    speaker: "Rachel Moore",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 36,
+    eventName: "Sustainable Energy Expo",
+    date: "2024-09-28",
+    speaker: "Prof. Alan Green",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 37,
+    eventName: "Web3 Interfaces Workshop",
+    date: "2024-10-10",
+    speaker: "Kevin Adams",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 38,
+    eventName: "Cybersecurity for Startups",
+    date: "2024-11-19",
+    speaker: "Emily Zhang",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 39,
+    eventName: "Smart Cities Forum",
+    date: "2024-10-18",
+    speaker: "Dr. Maria Hernandez",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 40,
+    eventName: "Tech Safari Mixer",
+    date: "2024-09-30",
+    speaker: "Guest Panel",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+
+  {
+    id: 41,
+    eventName: "Sustainable Energy Expo",
+    date: "2024-09-28",
+    speaker: "Prof. Alan Green",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 42,
+    eventName: "Web3 Interfaces Workshop",
+    date: "2024-10-10",
+    speaker: "Kevin Adams",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 43,
+    eventName: "Cybersecurity for Startups",
+    date: "2024-11-19",
+    speaker: "Emily Zhang",
+    status: "Completed",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 44,
+    eventName: "Smart Cities Forum",
+    date: "2024-10-18",
+    speaker: "Dr. Maria Hernandez",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
+  {
+    id: 45,
+    eventName: "Tech Safari Mixer",
+    date: "2024-09-30",
+    speaker: "Guest Panel",
+    status: "In Progress",
+    description: "",
+    speakerAvatars: [
+      "https://s3-alpha-sig.figma.com/img/e539/e894/3a2f8f8168015e38f7223ad7de3f7bd4?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ZD0NyWERtsqfXhicAvA4n02-kn8bLF8qFpQYZ8VuasqKlplRBvqXbk~RlQiIG18JnAVm8B~pUvjnjByPgriOO1-0FpoQ6--QVwcgl8GOTQrGZVwaAxE0H3vrk4ZEOTiaWXI7TOO-EhFwW-n5g7FbxZcp~FCaE5T~UDK7u7Aht3Usvr--vbpP2skxfb8sOr9sFBwGELjeQ0fE5N1JJBmSUNkcKToaH52KI6hz-ePdPraEO-tLGvMig5wGc5jjxZUydXjqm9sWND~ISsoPGfqzHNJTxQYLpQI1Xp34qNMIerOljK6ezxfCbOH9espAAnThQiUYXMRZLUis~aN4ZFmpeg__",
+      "https://s3-alpha-sig.figma.com/img/0315/cd8f/115085899b9f6cc06bb84eece8711520?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=e7GWZXx1t~TMICABtTlkx-6u1FnkjaaaeyJCXFFHzyh1nG-kFoVsil2kCWlAaFDst9K43~mO5CGk-hG5eHgsXohobgDnKlsN9qyapd5kuJ-98blv4grngC4M5OFzgPwLig83hwvmRWfbSKFf4J8xsSKU5dz3zz8uY6YLxk9gma6eBkxEIOTmyYMY~1QCJJlQw9XJPyHSHHcG7C9P7uen5nc-wR9Ko9EWI4JXQx5LPtxS46OERaKB7G4PQzZdKa8UJyojdTC9jmVJTNqYzqenSm-jhiZcQD7KMp3o31co2lpVJ8td-Y6UcveQmSIUX7X26EUCjVHXZAQSKn8wJMr6Hw__",
+      "https://s3-alpha-sig.figma.com/img/66d9/8042/a54f0e6d16cd09a76faa0e536ec239f7?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GWb982pFj0k0ZQFs9tqh1sk4FQzWyuoVREv1F7KnP1qxA6665mnK2ZpARg-~565sKAYFd~T7upm3CZ6B2Ro6mxMM1uV4~o-i6Qhb7BQFCSCdMxyVh-fzhOKrh1cKJwhX2sk2yuMAhCdfIGn7Uzox1eKWoD0tSj3jHW2dIqq9blTQv~zM1ooI1lN5OTdKZL8D4OayOx2y6S21rgvLIag-D1tjNOr-adeBTAYGwT6eHwyEtD1zDwUQPxsLoqlOPd7of-7~QXEdwPdEt3H6xLzmVOmnmAZ5oO1nkO~GMbwQvitXzxdA3IQaz8MrxBMHHfSOtTNhJvkQwGIc~Yy1pVjoUA__",
+    ],
+    speakers: ["Speaker Allison", "Speaker Collins", "Speaker Mathias"],
+    attendees: "300",
+  },
 ];

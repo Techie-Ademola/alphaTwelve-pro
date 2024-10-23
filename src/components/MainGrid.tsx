@@ -77,23 +77,24 @@ export default function MainGrid() {
           <HighlightedCard />
         </Grid> */}
 
-        <Grid size={{ sm: 12, md: 6 }} style={{border: '1px solid transparent'}}>
-          <Typography component="h3" variant="h5" sx={{ mb: 1, mt: 2, fontWeight: '500' }}>
+        <Grid size={{ sm: 12, md: 6 }}>
+          <Typography component="h3" variant="h5" sx={{ mb: 1, mt: 2, fontWeight: '500', width: '100%' }}>
             Event Registrations per month
           </Typography>
 
           <PageViewsBarChart />
         </Grid>
         <Grid size={{ sm: 12, md: 6 }}>
-          <Typography component="h3" variant="h5" sx={{ mb: 1, mt: 2, fontWeight: '500', opacity: '0', visibility: 'hidden' }}>
+          <Typography component="h3" variant="h5" sx={{ mb: 1, mt: 2, fontWeight: '500', opacity: '0', visibility: 'hidden' }}
+            className='d-none d-md-block'>
             E
           </Typography>
-          
+
           <SessionsChart />
         </Grid>
       </Grid>
       <Typography component="h3" variant="h5" sx={{ mb: 1, mt: 2, fontWeight: '500' }}>
-      Events History
+        Events History
       </Typography>
       <Grid container spacing={2} columns={12}>
         <Grid size={{ md: 12, lg: 12 }}>

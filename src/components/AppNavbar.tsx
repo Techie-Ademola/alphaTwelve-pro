@@ -10,6 +10,8 @@ import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import SideMenuMobile from './SideMenuMobile';
 import MenuButton from './MenuButton';
+import Applogo from "../theme/assets/event-logo.png";
+import ApplogoSmall from "../theme/assets/event-logo-small.png";
 
 const Toolbar = styled(MuiToolbar)({
   width: '100%',
@@ -58,14 +60,27 @@ export default function AppNavbar() {
           }}
         >
           <Stack direction="row" spacing={1} sx={{ justifyContent: 'center' }}>
-            <CustomIcon />
+            {/* <CustomIcon />
             <Typography variant="h4" component="h1" sx={{ color: 'text.primary' }}>
               Dashboard
-            </Typography>
+            </Typography> */}
+            <img
+              src={`${Applogo}`}
+              alt="App Logo"
+              width={`${100}`}
+              style={{
+                display: 'block',
+                margin: '0 auto'
+              }}
+            />
           </Stack>
           <MenuButton aria-label="menu" onClick={toggleDrawer(true)}>
-            <MenuRoundedIcon />
+            {/* <MenuRoundedIcon /> */}
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 7H7M20 7H11M20 17H17M4 17H13M4 12H20" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
           </MenuButton>
+
           <SideMenuMobile open={open} toggleDrawer={toggleDrawer} />
         </Stack>
       </Toolbar>

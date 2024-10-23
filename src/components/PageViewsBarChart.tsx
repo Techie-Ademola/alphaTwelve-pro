@@ -16,7 +16,7 @@ export default function PageViewsBarChart() {
     rgba(133, 118, 255, 1),
   ];
   return (
-    <Card variant="outlined" sx={{ width: '100%', minHeight: '25.7em' }}>
+    <Card variant="outlined" sx={{ width: '100%', minHeight: '25.7em' }} className=''>
       <CardContent className='pt-5' style={{}}>
         <BarChart
           borderRadius={2}
