@@ -1,17 +1,15 @@
-import * as React from 'react';
+import React, { useState, useMemo, useEffect } from "react";
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import MuiToolbar from '@mui/material/Toolbar';
 import { tabsClasses } from '@mui/material/Tabs';
-import Typography from '@mui/material/Typography';
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import SideMenuMobile from './SideMenuMobile';
 import MenuButton from './MenuButton';
 import Applogo from "../theme/assets/event-logo.png";
-import ApplogoSmall from "../theme/assets/event-logo-small.png";
+import bus from "../bus";
 
 const Toolbar = styled(MuiToolbar)({
   width: '100%',
@@ -31,8 +29,40 @@ const Toolbar = styled(MuiToolbar)({
 
 export default function AppNavbar() {
   const [open, setOpen] = React.useState(false);
+  const [IsCollapsed, setIsCollapsed] = useState(false);
+  const [mui_mode, setMuiMode] = useState(localStorage.getItem("mui-mode"));
+  const [modeStatus, setModeStatus] = useState('');
+
+  let is_collapsed = localStorage.getItem("is_collapsed");
+  const parsedIsCollapsed = is_collapsed ? JSON.parse(is_collapsed) : false;
+
+  const handleToggleCollapse = () => {
+    console.log('IsCollapsed:', IsCollapsed);
+
+    if (IsCollapsed && IsCollapsed === true) {
+    } else {
+      setIsCollapsed(true);
+      localStorage.setItem("is_collapsed", JSON.stringify(true));
+      bus.emit("notify_collapse", 'true');
+    }
+  }
+
+  useEffect(() => {
+    console.log('mui_mode', mui_mode);
+    if (mui_mode)
+      setModeStatus(mui_mode);
+
+    if (parsedIsCollapsed !== null) {
+      console.log('parsedIsCollapsed:', parsedIsCollapsed);
+      setIsCollapsed(parsedIsCollapsed);
+    }
+  }, []);
 
   const toggleDrawer = (newOpen: boolean) => () => {
+    setIsCollapsed(false);
+    localStorage.setItem("is_collapsed", JSON.stringify(false));
+    bus.emit("notify_collapse", 'false');
+    
     setOpen(newOpen);
   };
 

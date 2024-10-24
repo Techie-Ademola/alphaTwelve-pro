@@ -351,6 +351,60 @@ html[data-mui-color-scheme="dark"]
     z-index: 6;
 }
 
+
+.mode_toggler {
+    position: relative;
+}
+
+.mode_toggler::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 15;
+    background-color: transparent;
+    transition: .2s ease-out;
+    border-radius: 4px;
+}
+
+.mode_toggler:hover::before {
+    background-color: hsla(220, 20%, 35%, 0.2);
+}
+
+html[data-mui-color-scheme="dark"] .MuiInputBase-root.Mui-focused {
+    border: 1px solid hsl(220, 20%, 25%) !important;
+}
+
+
+.status_Filter .drop_svg,
+.status_Filter_right .drop_svg
+ {
+    display: block !important;
+    position: absolute;
+    z-index: 10;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%) scale(1.5);
+}
+.status_Filter div[role="combobox"] ~ svg,
+.status_Filter_right div[role="combobox"] ~ svg {
+    display: none;
+}
+
+html[data-mui-color-scheme="light"] .speakerAvatars img {
+    border: 3px solid white;
+    position: relative;
+}
+
+html[data-mui-color-scheme="dark"] .speakerAvatars img {
+    border: 3px solid #05070a;
+    position: relative;
+}
+
 @media screen and (max-width: 576px) {
 
     .MuiDataGrid-cell {
@@ -368,17 +422,29 @@ html[data-mui-color-scheme="dark"]
     }
 
     .styled_carousel .carousel-item {
-        min-height: 495px;
+        min-height: 310px;
         position: relative;
     }
 
     .styled_carousel .carousel-item img {
+        height: 100% !important;
         width: auto !important;
         display: flex;
         justify-content: center;
         align-items: center;
-        transform: translateX(-100px);
+        /* transform: translateX(-100px); */
     }
+
+    .styled_carousel .carousel-item {
+        height: 210px !important;
+        max-height: 210px !important;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* .styled_carousel .carousel-item img {
+        height: 100%;
+    } */
 
     .carousel-item {
         background: #ADA9BB;
@@ -401,8 +467,27 @@ html[data-mui-color-scheme="dark"]
         justify-content: start !important;
         position: relative;
     }
+
     .footer_wrap button {
         width: 100% !important;
         margin-bottom: 10px;
+    }
+
+    .styled_carousel .carousel-control-prev {
+        transform: translateX(-7px);
+    }
+
+    .styled_carousel .carousel-control-next {
+        /* transform: translateX(10px); */
+    }
+
+}
+
+@media screen and (max-width: 991px) {
+
+    .MuiDataGrid-cell {
+        white-space: nowrap !important;
+        overflow-x: hidden !important;
+        text-overflow: ellipsis;
     }
 }

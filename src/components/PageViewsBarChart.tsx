@@ -12,8 +12,6 @@ export default function PageViewsBarChart() {
   const theme = useTheme();
   const colorPalette = [
     rgba(133, 118, 255, 1),
-    rgba(133, 118, 255, 1),
-    rgba(133, 118, 255, 1),
   ];
   return (
     <Card variant="outlined" sx={{ width: '100%', minHeight: '25.7em' }} className=''>

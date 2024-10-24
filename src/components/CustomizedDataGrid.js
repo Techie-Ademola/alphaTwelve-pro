@@ -24,7 +24,7 @@ const modalStyles = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 450,
-  maxWidth: '90%',
+  maxWidth: "90%",
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 0,
@@ -36,17 +36,17 @@ export default function CustomizedDataGrid() {
   const [statusFilter, setStatusFilter] = React.useState("all");
   const [dateFilter, setDateFilter] = React.useState("");
   const [nameFilter, setNameFilter] = React.useState("");
-  const [sortOrder, setSortOrder] = React.useState("desc");
+  const [sortOrder, setSortOrder] = React.useState("asc");
   const [pageSize, setPageSize] = React.useState(10);
   const [currentPage, setCurrentPage] = React.useState(0);
   const [mui_mode, setMuiMode] = useState(localStorage.getItem("mui-mode"));
   const [modeStatus, setModeStatus] = useState("");
-  const [open, setOpen] = useState(false); // State to control modal visibility
-  const [selectedRow, setSelectedRow] = useState(null); // State for selected event data
+  const [open, setOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
 
   const handleRowClick = (params) => {
-    setSelectedRow(params.row); // Set selected row data
-    setOpen(true); // Open the modal
+    setSelectedRow(params.row);
+    setOpen(true);
     console.log("params.row:", params.row);
   };
 
@@ -116,6 +116,9 @@ export default function CustomizedDataGrid() {
   // Handle sort order change
   const handleSortChange = (event) => {
     setSortOrder(event.target.value);
+    setTimeout(() => {
+      console.log("sortedRows:", sortedRows);
+    }, 1000);
   };
 
   // Handle page change
@@ -189,6 +192,22 @@ export default function CustomizedDataGrid() {
                     sx={{ minWidth: 120 }}
                     className="status_Filter  mx-md-0 w-100"
                   >
+                    <svg
+                      className="drop_svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M10.1667 7.16666L8 9.5L5.83334 7.16666"
+                        stroke="#334155"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
                     <Select
                       value={statusFilter}
                       label="Status"
@@ -217,8 +236,24 @@ export default function CustomizedDataGrid() {
             <FormControl
               size="small"
               sx={{ minWidth: 120 }}
-              className="status_Filter mx-2 mx-md-0 d-none d-md-block"
+              className="status_Filter mx-2 mx-md-0 d-none d-md-block position-relative"
             >
+              <svg
+                className="drop_svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.1667 7.16666L8 9.5L5.83334 7.16666"
+                  stroke="#334155"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
               <Select
                 value={statusFilter}
                 label="Status"
@@ -241,7 +276,7 @@ export default function CustomizedDataGrid() {
 
           <Box
             sx={{ alignItems: "center", gap: 1, mb: 2 }}
-            className={`d-md-flex`}
+            className={`d-md-flex status_Filter_right`}
           >
             {/* Sort Order */}
 
@@ -253,6 +288,22 @@ export default function CustomizedDataGrid() {
               sx={{ minWidth: 120 }}
               className="d-none d-md-block"
             >
+              <svg
+                className="drop_svg"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.1667 7.16666L8 9.5L5.83334 7.16666"
+                  stroke="#334155"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
               <Select
                 value={sortOrder}
                 label="Sort By"
@@ -267,6 +318,22 @@ export default function CustomizedDataGrid() {
               <div className="d-flex justify-content-between align-items-center">
                 <Box sx={{ mb: 0, fontSize: "14px" }}>Sort:</Box>
                 <FormControl size="small" sx={{ minWidth: 120 }}>
+                  <svg
+                    className="drop_svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M10.1667 7.16666L8 9.5L5.83334 7.16666"
+                      stroke="#334155"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
                   <Select
                     value={sortOrder}
                     label="Sort By"
@@ -392,10 +459,9 @@ export default function CustomizedDataGrid() {
         </Box>
 
         {/* DataGrid */}
-        <div className="position-relative w-100" style={{ overflowX: "auto" }}>
+        <div className="position-relative w-100" style={{ overflowX: "auto", overflowY: 'hidden' }}>
           <DataGrid
             autoHeight
-            // checkboxSelection
             rows={filteredRows}
             columns={columns}
             getRowClassName={(params) =>
@@ -409,41 +475,46 @@ export default function CustomizedDataGrid() {
               setCurrentPage(model.page);
               setPageSize(model.pageSize);
             }}
-            // rowsPerPageOptions={[5, 10, 20, 50]}
-            pageSizeOptions={[10, 20, 50]}
             disableColumnResize
+            style={{ minWidth: "60em", cursor: "pointer", minHeight: '100px' }}
+            onRowClick={handleRowClick}
+            pageSizeOptions={[10, 20, 50]}
             // density="compact"
-            pagination
-            style={{ minWidth: "60em", cursor: "pointer" }}
-            onRowClick={handleRowClick} // Handle row click
-
-            // slotProps={{
-            //   filterPanel: {
-            //     filterFormProps: {
-            //       logicOperatorInputProps: {
-            //         variant: "outlined",
-            //         size: "small",
-            //       },
-            //       columnInputProps: {
-            //         variant: "outlined",
-            //         size: "small",
-            //         sx: { mt: "auto" },
-            //       },
-            //       operatorInputProps: {
-            //         variant: "outlined",
-            //         size: "small",
-            //         sx: { mt: "auto" },
-            //       },
-            //       valueInputProps: {
-            //         InputComponentProps: {
-            //           variant: "outlined",
-            //           size: "small",
-            //         },
-            //       },
-            //     },
-            //   },
-            // }}
+            // pagination
+            hideFooterPagination={true}
           />
+
+          {/*             
+                        // rowsPerPageOptions={[5, 10, 20, 50]}
+                        // pageSizeOptions={[10, 20, 50]}
+                        // density="compact"
+                        // pagination={false}
+                        // slotProps={{
+                        //   filterPanel: {
+                        //     filterFormProps: {
+                        //       logicOperatorInputProps: {
+                        //         variant: "outlined",
+                        //         size: "small",
+                        //       },
+                        //       columnInputProps: {
+                        //         variant: "outlined",
+                        //         size: "small",
+                        //         sx: { mt: "auto" },
+                        //       },
+                        //       operatorInputProps: {
+                        //         variant: "outlined",
+                        //         size: "small",
+                        //         sx: { mt: "auto" },
+                        //       },
+                        //       valueInputProps: {
+                        //         InputComponentProps: {
+                        //           variant: "outlined",
+                        //           size: "small",
+                        //         },
+                        //       },
+                        //     },
+                        //   },
+                        // }} */}
 
           {/* Pagination Controls */}
           {/* <Box
@@ -477,100 +548,186 @@ export default function CustomizedDataGrid() {
           </Box> */}
 
           {/* Pagination Controls */}
-          <Box
-            sx={{
-              mt: 2,
+          <div
+            className="w-100 d-sm-flex position-absolute px-4"
+            style={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "space-between",
               alignItems: "center",
-              bottom: "13px",
-              left: "18px",
+              bottom: "-2px",
+              // left: "18px",
             }}
-            className="position-absolute"
           >
-            {/* Previous Button */}
-            <Button
-              variant="outlined"
-              onClick={() => handlePageChange(null, currentPage - 1)}
-              disabled={currentPage === 0}
-              sx={{ mx: 0.4, px: 1 }}
-              style={{
-                paddingTop: "5px",
-                paddingBottom: "5px",
-                minWidth: "fit-content",
-                height: "auto",
-              }}
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+            <div>
+              <Box
+                sx={{
+                  // mt: 2,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  bottom: "13px",
+                  left: "18px",
+                }}
+                className="position-absolute"
               >
-                <path
-                  d="M11.0417 7.29169L8.125 10L11.0417 12.7084"
-                  stroke="#64748B"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </Button>
-
-            {/* Page Numbers */}
-            {[...Array(Math.ceil(filteredRows.length / pageSize))].map(
-              (_, i) => (
+                {/* Previous Button */}
                 <Button
-                  key={i}
-                  variant={i === currentPage ? "contained" : "outlined"}
-                  onClick={(event) => handlePageChange(event, i)}
-                  sx={{ mx: 0.4 }}
-                  className="border-0 outline-0"
+                  variant="outlined"
+                  onClick={() => handlePageChange(null, currentPage - 1)}
+                  disabled={currentPage === 0}
+                  sx={{ mx: 0.4, px: 1 }}
                   style={{
-                    boxShadow: 'none',
                     paddingTop: "5px",
                     paddingBottom: "5px",
                     minWidth: "fit-content",
                     height: "auto",
-                    borderRadius: "50%",
-                    width: "27px",
-                    minWidth: "27px",
-                    height: "30px",
-                    minHeight: "30px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: 'white',
-                    background: `${i === currentPage ? 'rgba(133, 118, 255, 1)' : 'transparent'}`
                   }}
                 >
-                  {i + 1}
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M11.0417 7.29169L8.125 10L11.0417 12.7084"
+                      stroke="#64748B"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
                 </Button>
-              )
-            )}
 
-            {/* Next Button */}
-            <Button
-              variant="outlined"
-              onClick={() => handlePageChange(null, currentPage + 1)}
-              disabled={
-                currentPage === Math.ceil(filteredRows.length / pageSize) - 1
-              }
-              sx={{ mx: 0.4, px: 1 }}
-              style={{
-                paddingTop: "5px",
-                paddingBottom: "5px",
-                minWidth: "fit-content",
-                height: "auto",
+                {/* Page Numbers */}
+                {[...Array(Math.ceil(filteredRows.length / pageSize))].map(
+                  (_, i) => (
+                    <Button
+                      key={i}
+                      variant={i === currentPage ? "contained" : "outlined"}
+                      onClick={(event) => handlePageChange(event, i)}
+                      sx={{ mx: 0.4 }}
+                      className="border-0 outline-0"
+                      style={{
+                        boxShadow: "none",
+                        paddingTop: "5px",
+                        paddingBottom: "5px",
+                        minWidth: "fit-content",
+                        height: "auto",
+                        borderRadius: "50%",
+                        width: "27px",
+                        minWidth: "27px",
+                        height: "30px",
+                        minHeight: "30px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        color: `${
+                          modeStatus === "dark" && i !== currentPage
+                            ? "white"
+                            : modeStatus === "light" && i !== currentPage
+                            ? "black"
+                            : (i === currentPage && modeStatus === "dark") ||
+                              modeStatus === "white"
+                            ? "white"
+                            : i === currentPage &&
+                              modeStatus === "light" &&
+                              modeStatus !== "dark"
+                            ? "white"
+                            : ""
+                        }`,
+                        background: `${
+                          i === currentPage
+                            ? "rgba(133, 118, 255, 1)"
+                            : "transparent"
+                        }`,
+                      }}
+                    >
+                      {i + 1}
+                    </Button>
+                  )
+                )}
+
+                {/* Next Button */}
+                <Button
+                  variant="outlined"
+                  onClick={() => handlePageChange(null, currentPage + 1)}
+                  disabled={
+                    currentPage ===
+                    Math.ceil(filteredRows.length / pageSize) - 1
+                  }
+                  sx={{ mx: 0.4, px: 1 }}
+                  style={{
+                    paddingTop: "5px",
+                    paddingBottom: "5px",
+                    minWidth: "fit-content",
+                    height: "auto",
+                  }}
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M8.95833 7.29169L11.875 10L8.95833 12.7084"
+                      stroke="#334155"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </Button>
+              </Box>
+            </div>
+
+            <Box
+              sx={{
+                // display: "flex",
+                // justifyContent: "flex-end",
+                padding: "10px",
               }}
+              className="d-flex align-items-center"
             >
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M8.95833 7.29169L11.875 10L8.95833 12.7084" stroke="#334155" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
-            </Button>
-          </Box>
+              <Box sx={{ mb: 0, fontSize: "14px" }} className="d-none d-md-block mr-2">
+              Show:
+            </Box>
+              {/* Show only Page Size Selector */}
+              <FormControl
+                size="small"
+                sx={{ minWidth: 80 }}
+                className="status_Filter"
+              >
+                <svg
+                  className="drop_svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.1667 7.16666L8 9.5L5.83334 7.16666"
+                    stroke="#334155"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <Select
+                  value={pageSize}
+                  onChange={(event) => setPageSize(event.target.value)}
+                >
+                  <MenuItem value={10}>10</MenuItem>
+                  <MenuItem value={20}>20</MenuItem>
+                  <MenuItem value={50}>50</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </div>
         </div>
       </Box>
 

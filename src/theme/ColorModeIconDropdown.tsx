@@ -91,7 +91,8 @@ export default function ColorModeSwitch({ iscollapsed }: ColorModeSwitchProps) {
                 id="checkboxInput"
                 className="checkboxInput"
                 checked={mode === 'dark' || mode === 'system'}
-                onChange={handleChange}
+                value={mode}
+                // onChange={handleChange}
               />
               <label htmlFor="checkboxInput" className="toggleSwitch"></label>
             </StyledWrapper>
