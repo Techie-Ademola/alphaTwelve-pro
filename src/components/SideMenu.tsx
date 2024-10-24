@@ -32,13 +32,13 @@ export default function SideMenu() {
 
   useEffect(() => {
     if (parsedIsCollapsed !== null) {
-      console.log('parsedIsCollapsed:', parsedIsCollapsed);
+      // console.log('parsedIsCollapsed:', parsedIsCollapsed);
       setIsCollapsed(parsedIsCollapsed);
     }
 
     bus.on("notify_collapse", (val) => {
       if (val) {
-        console.log('setIsCollapsed val:', val);
+        // console.log('setIsCollapsed val:', val);
         if (val === 'true') {
           setIsCollapsed(true);
         } 

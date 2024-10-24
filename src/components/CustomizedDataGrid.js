@@ -47,7 +47,7 @@ export default function CustomizedDataGrid() {
   const handleRowClick = (params) => {
     setSelectedRow(params.row);
     setOpen(true);
-    console.log("params.row:", params.row);
+    // console.log("params.row:", params.row);
   };
 
   const handleClose = () => setOpen(false);
@@ -55,13 +55,13 @@ export default function CustomizedDataGrid() {
   const parsedIsCollapsed = is_collapsed ? JSON.parse(is_collapsed) : false;
 
   useEffect(() => {
-    console.log("mui_mode", mui_mode);
+    // console.log("mui_mode", mui_mode);
     if (mui_mode) setModeStatus(mui_mode);
   }, []);
 
   useEffect(() => {
     bus.on("emit_mode_status", (val) => {
-      console.log("val:", val);
+      // console.log("val:", val);
 
       if (val !== null && (val === "light" || val === "dark")) {
         setModeStatus(val);
@@ -117,7 +117,7 @@ export default function CustomizedDataGrid() {
   const handleSortChange = (event) => {
     setSortOrder(event.target.value);
     setTimeout(() => {
-      console.log("sortedRows:", sortedRows);
+      // console.log("sortedRows:", sortedRows);
     }, 1000);
   };
 

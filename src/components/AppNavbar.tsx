@@ -37,7 +37,7 @@ export default function AppNavbar() {
   const parsedIsCollapsed = is_collapsed ? JSON.parse(is_collapsed) : false;
 
   const handleToggleCollapse = () => {
-    console.log('IsCollapsed:', IsCollapsed);
+    // console.log('IsCollapsed:', IsCollapsed);
 
     if (IsCollapsed && IsCollapsed === true) {
     } else {
@@ -48,12 +48,12 @@ export default function AppNavbar() {
   }
 
   useEffect(() => {
-    console.log('mui_mode', mui_mode);
+    // console.log('mui_mode', mui_mode);
     if (mui_mode)
       setModeStatus(mui_mode);
 
     if (parsedIsCollapsed !== null) {
-      console.log('parsedIsCollapsed:', parsedIsCollapsed);
+      // console.log('parsedIsCollapsed:', parsedIsCollapsed);
       setIsCollapsed(parsedIsCollapsed);
     }
   }, []);
@@ -62,7 +62,7 @@ export default function AppNavbar() {
     setIsCollapsed(false);
     localStorage.setItem("is_collapsed", JSON.stringify(false));
     bus.emit("notify_collapse", 'false');
-    
+
     setOpen(newOpen);
   };
 

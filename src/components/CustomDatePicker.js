@@ -23,7 +23,7 @@ function ButtonField(props) {
   // Prevents the span's click from triggering the date picker open/close
   const handleClearClick = (e) => {
     // Debugging: log the event to ensure it's being passed
-    console.log('Event:', e);
+    // console.log('Event:', e);
     if (e && e.stopPropagation) {
       e.stopPropagation(); // Prevents the button's onClick from firing
     }

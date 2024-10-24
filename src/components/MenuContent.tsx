@@ -204,7 +204,7 @@ export default function MenuContent() {
   const parsedIsCollapsed = is_collapsed ? JSON.parse(is_collapsed) : false;
 
   const handleToggleCollapse = () => {
-    console.log('IsCollapsed:', IsCollapsed);
+    // console.log('IsCollapsed:', IsCollapsed);
 
     if (IsCollapsed && IsCollapsed === true) {
       setIsCollapsed(false);
@@ -218,12 +218,12 @@ export default function MenuContent() {
   }
 
   useEffect(() => {
-    console.log('mui_mode', mui_mode);
+    // console.log('mui_mode', mui_mode);
     if (mui_mode)
       setModeStatus(mui_mode);
 
     if (parsedIsCollapsed !== null) {
-      console.log('parsedIsCollapsed:', parsedIsCollapsed);
+      // console.log('parsedIsCollapsed:', parsedIsCollapsed);
       setIsCollapsed(parsedIsCollapsed);
     }
   }, []);
@@ -231,7 +231,7 @@ export default function MenuContent() {
 
   useEffect(() => {
     bus.on("emit_mode_status", (val) => {
-      console.log('val:', val);
+      // console.log('val:', val);
 
       if (val !== null && (val === 'light' || val === 'dark')) {
         setModeStatus(val);
