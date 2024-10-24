@@ -549,16 +549,15 @@ export default function CustomizedDataGrid() {
 
           {/* Pagination Controls */}
           <div
-            className="w-100 d-sm-flex position-absolute px-4"
+            className="w-100 d-md-flex bottom_footer px-4"
             style={{
-              display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
               bottom: "-2px",
               // left: "18px",
             }}
           >
-            <div>
+            <div >
               <Box
                 sx={{
                   // mt: 2,
@@ -568,7 +567,6 @@ export default function CustomizedDataGrid() {
                   bottom: "13px",
                   left: "18px",
                 }}
-                className="position-absolute"
               >
                 {/* Previous Button */}
                 <Button
@@ -690,9 +688,9 @@ export default function CustomizedDataGrid() {
                 // justifyContent: "flex-end",
                 padding: "10px",
               }}
-              className="d-flex align-items-center"
+              className="d-flex align-items-center d-block fit-content show_rowcount"
             >
-              <Box sx={{ mb: 0, fontSize: "14px" }} className="d-none d-md-block mr-2">
+              <Box sx={{ mb: 0, fontSize: "14px" }} className=" mr-2">
               Show:
             </Box>
               {/* Show only Page Size Selector */}

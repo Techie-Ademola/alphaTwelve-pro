@@ -326,13 +326,13 @@ html[data-mui-color-scheme="dark"] p,
 html[data-mui-color-scheme="dark"] .MuiBox-root {
     color: #fff;
 }
-html[data-mui-color-scheme="light"]
-.speakerAvatars img {
+
+html[data-mui-color-scheme="light"] .speakerAvatars img {
     border: 3px solid white;
     position: relative;
 }
-html[data-mui-color-scheme="dark"]
-.speakerAvatars img {
+
+html[data-mui-color-scheme="dark"] .speakerAvatars img {
     border: 3px solid #05070a;
     position: relative;
 }
@@ -381,8 +381,7 @@ html[data-mui-color-scheme="dark"] .MuiInputBase-root.Mui-focused {
 
 
 .status_Filter .drop_svg,
-.status_Filter_right .drop_svg
- {
+.status_Filter_right .drop_svg {
     display: block !important;
     position: absolute;
     z-index: 10;
@@ -390,8 +389,9 @@ html[data-mui-color-scheme="dark"] .MuiInputBase-root.Mui-focused {
     top: 50%;
     transform: translateY(-50%) scale(1.5);
 }
-.status_Filter div[role="combobox"] ~ svg,
-.status_Filter_right div[role="combobox"] ~ svg {
+
+.status_Filter div[role="combobox"]~svg,
+.status_Filter_right div[role="combobox"]~svg {
     display: none;
 }
 
@@ -405,7 +405,23 @@ html[data-mui-color-scheme="dark"] .speakerAvatars img {
     position: relative;
 }
 
+.bottom_footer {
+    position: absolute;
+}
+
 @media screen and (max-width: 576px) {
+    .bottom_footer {
+        position: relative;
+        transform: translateY(-46px);
+        flex-direction: column;
+        gap: 2em !important;
+        justify-content: flex-end !important;
+        align-items: flex-end !important;
+    }
+
+    .bottom_footer .show_rowcount {
+        transform: translate(-30px, 20px);
+    }
 
     .MuiDataGrid-cell {
         white-space: nowrap !important;
