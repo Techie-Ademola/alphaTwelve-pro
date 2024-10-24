@@ -58,7 +58,7 @@ export default function CustomizedDataGrid() {
           </svg>
 
           <Box
-            sx={{ mb: 0, mt: 1, fontWeight: "400", fontSize: "15px" }}
+            sx={{ mb: 0, mt: 1, fontWeight: "400", fontSize: "13px" }}
             className=""
           >
             Home
@@ -92,7 +92,7 @@ export default function CustomizedDataGrid() {
           </svg>
 
           <Box
-            sx={{ mb: 0, mt: 1, fontWeight: "400", fontSize: "15px" }}
+            sx={{ mb: 0, mt: 1, fontWeight: "400", fontSize: "13px" }}
             className=""
           >
             Events
@@ -126,7 +126,7 @@ export default function CustomizedDataGrid() {
           </svg>
 
           <Box
-            sx={{ mb: 0, mt: 1, fontWeight: "400", fontSize: "15px" }}
+            sx={{ mb: 0, mt: 1, fontWeight: "400", fontSize: "13px" }}
             className=""
           >
             Speakers
@@ -155,7 +155,7 @@ export default function CustomizedDataGrid() {
           </svg>
 
           <Box
-            sx={{ mb: 0, mt: 1, fontWeight: "400", fontSize: "15px" }}
+            sx={{ mb: 0, mt: 1, fontWeight: "400", fontSize: "13px" }}
             className=""
           >
             Reports
@@ -180,7 +180,7 @@ export default function CustomizedDataGrid() {
           </svg>
 
           <Box
-            sx={{ mb: 0, mt: 1, fontWeight: "400", fontSize: "15px" }}
+            sx={{ mb: 0, mt: 1, fontWeight: "400", fontSize: "13px" }}
             className=""
           >
             Profile
