@@ -3,9 +3,11 @@
     font-optical-sizing: auto !important;
     /* font-weight: <weight>; */
     font-style: normal;
+    box-sizing: border-box !important;
 }
 html, body {
     overflow-x: hidden;
+    box-sizing: border-box !important;
 }
 
 html[data-mui-color-scheme="light"],
@@ -460,6 +462,7 @@ html[data-mui-color-scheme="light"] .bottom_navbar_wrapper {
 }
 
 @media screen and (max-width: 576px) {
+
     .bottom_footer {
         position: relative;
         transform: translateY(-46px);
