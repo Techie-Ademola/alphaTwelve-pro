@@ -67,9 +67,9 @@ function ButtonField(props) {
           <path
             d="M10.1667 7.16666L8 9.5L5.83334 7.16666"
             stroke="#334155"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       )}

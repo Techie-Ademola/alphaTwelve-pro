@@ -144,7 +144,7 @@ export default function CustomizedDataGrid() {
 
   return (
     <>
-      <Box sx={{ height: "auto", width: "100%" }}>
+      <Box sx={{ height: "auto", width: "100%", pb: 5 }}>
         {/* Filters and Sorting Section */}
         <Box
           sx={{
@@ -203,9 +203,9 @@ export default function CustomizedDataGrid() {
                       <path
                         d="M10.1667 7.16666L8 9.5L5.83334 7.16666"
                         stroke="#334155"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                     <Select
@@ -249,9 +249,9 @@ export default function CustomizedDataGrid() {
                 <path
                   d="M10.1667 7.16666L8 9.5L5.83334 7.16666"
                   stroke="#334155"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
               <Select
@@ -299,9 +299,9 @@ export default function CustomizedDataGrid() {
                 <path
                   d="M10.1667 7.16666L8 9.5L5.83334 7.16666"
                   stroke="#334155"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
               <Select
@@ -329,9 +329,9 @@ export default function CustomizedDataGrid() {
                     <path
                       d="M10.1667 7.16666L8 9.5L5.83334 7.16666"
                       stroke="#334155"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                   <Select
@@ -393,9 +393,9 @@ export default function CustomizedDataGrid() {
                     <path
                       d="M3.16663 9.83333V10.8333C3.16663 11.9379 4.06206 12.8333 5.16663 12.8333H10.8333C11.9379 12.8333 12.8333 11.9379 12.8333 10.8333V9.83333M7.99996 9.5V3.16666M7.99996 9.5L5.83329 7.16666M7.99996 9.5L10.1666 7.16666"
                       stroke={`${modeStatus === "light" ? "#141414" : "#fff"}`}
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                   Export
@@ -448,9 +448,9 @@ export default function CustomizedDataGrid() {
                 <path
                   d="M3.16663 9.83333V10.8333C3.16663 11.9379 4.06206 12.8333 5.16663 12.8333H10.8333C11.9379 12.8333 12.8333 11.9379 12.8333 10.8333V9.83333M7.99996 9.5V3.16666M7.99996 9.5L5.83329 7.16666M7.99996 9.5L10.1666 7.16666"
                   stroke={`${modeStatus === "light" ? "#141414" : "#fff"}`}
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
               Export
@@ -591,9 +591,9 @@ export default function CustomizedDataGrid() {
                     <path
                       d="M11.0417 7.29169L8.125 10L11.0417 12.7084"
                       stroke="#64748B"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </Button>
@@ -673,9 +673,9 @@ export default function CustomizedDataGrid() {
                     <path
                       d="M8.95833 7.29169L11.875 10L8.95833 12.7084"
                       stroke="#334155"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </Button>
@@ -710,18 +710,18 @@ export default function CustomizedDataGrid() {
                   <path
                     d="M10.1667 7.16666L8 9.5L5.83334 7.16666"
                     stroke="#334155"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
                 <Select
                   value={pageSize}
                   onChange={(event) => setPageSize(event.target.value)}
                 >
-                  <MenuItem value={10}>10</MenuItem>
-                  <MenuItem value={20}>20</MenuItem>
-                  <MenuItem value={50}>50</MenuItem>
+                  <MenuItem value={10}>10 Rows</MenuItem>
+                  <MenuItem value={20}>20 Rows</MenuItem>
+                  <MenuItem value={50}>50 Rows</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -769,16 +769,16 @@ export default function CustomizedDataGrid() {
                   <path
                     d="M14.625 9.375L9.375 14.625"
                     stroke="#334155"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M9.375 9.375L14.625 14.625"
                     stroke="#334155"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               </span>
@@ -787,6 +787,7 @@ export default function CustomizedDataGrid() {
                 component="h3"
                 variant="h5"
                 sx={{ mb: 1, mt: 0, fontWeight: "500" }}
+                className="eventName"
               >
                 {selectedRow.eventName}
               </Typography>

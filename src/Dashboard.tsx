@@ -11,6 +11,7 @@ import AppNavbar from './components/AppNavbar';
 import Header from './components/Header';
 import MainGrid from './components/MainGrid';
 import SideMenu from './components/SideMenu';
+import AppMobileNavbar from './components/AppMobileNavbar.js';
 import AppTheme from './theme/AppTheme';
 import {
   chartsCustomizations,
@@ -60,6 +61,16 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
           </Stack>
         </Box>
       </Box>
+      <div className="d-block d-sm-none" style={{
+        position: 'fixed',
+        bottom: '0',
+        left: '0',
+        right: '0',
+        zIndex: '99'
+      }}>
+
+        <AppMobileNavbar />
+      </div>
     </AppTheme>
   );
 }
